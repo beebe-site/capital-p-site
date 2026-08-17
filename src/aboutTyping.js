@@ -3,16 +3,64 @@ import { ABOUT_PARAGRAPHS } from "./data/content.js";
 // The "possessed typewriter" about.txt easter egg: the panel starts holding
 // only the seed below, and every keystroke anywhere in the window reveals
 // the next real character of the copy — regardless of which key was
-// actually pressed. Backspace rewinds the reveal by one character; once the
-// whole passage is out, further forward keystrokes are absorbed and do
-// nothing (there's nothing left to reveal).
-export const ABOUT_SEED = "Capital P is a";
+// actually pressed. Backspace rewinds the reveal; once the whole passage is
+// out, further forward keystrokes are absorbed and do nothing.
+//
+// Reveals one character at a time up through WORD_MODE_THRESHOLD (enough to
+// sell the gimmick), then switches to revealing a whole word per keystroke —
+// mashing out ~340 characters one at a time got tedious in practice. A
+// word-jump never crosses a paragraph break in one keystroke, so paragraph
+// transitions still land as a distinct beat.
+export const ABOUT_SEED = "Capital P is a ";
 
-const TOTAL_LENGTH = ABOUT_PARAGRAPHS.reduce(
-  (sum, runs) => sum + runs.reduce((s, run) => s + run.text.length, 0),
-  0
-);
+const FLAT_TEXT = ABOUT_PARAGRAPHS.map((runs) => runs.map((r) => r.text).join("")).join("");
+const TOTAL_LENGTH = FLAT_TEXT.length;
 const LAST_PARAGRAPH_INDEX = ABOUT_PARAGRAPHS.length - 1;
+
+const PARAGRAPH_END_OFFSETS = (() => {
+  let offset = 0;
+  return ABOUT_PARAGRAPHS.map((runs) => {
+    offset += runs.reduce((s, r) => s + r.text.length, 0);
+    return offset;
+  });
+})();
+
+const WORD_MODE_MARKER = "Capital P is a company offering";
+const WORD_MODE_THRESHOLD = FLAT_TEXT.startsWith(WORD_MODE_MARKER)
+  ? WORD_MODE_MARKER.length
+  : ABOUT_SEED.length;
+
+function paragraphEndFor(pos) {
+  for (const end of PARAGRAPH_END_OFFSETS) {
+    if (pos < end) return end;
+  }
+  return TOTAL_LENGTH;
+}
+
+function paragraphStartFor(pos) {
+  let start = 0;
+  for (const end of PARAGRAPH_END_OFFSETS) {
+    if (pos < end) return start;
+    start = end;
+  }
+  return start;
+}
+
+function nextWordBoundary(pos) {
+  const cap = paragraphEndFor(pos);
+  let i = pos;
+  while (i < cap && FLAT_TEXT[i] === " ") i++;
+  while (i < cap && FLAT_TEXT[i] !== " ") i++;
+  return i;
+}
+
+function prevWordBoundary(pos) {
+  const floor = Math.max(WORD_MODE_THRESHOLD, paragraphStartFor(pos - 1));
+  let i = pos;
+  while (i > floor && FLAT_TEXT[i - 1] === " ") i--;
+  while (i > floor && FLAT_TEXT[i - 1] !== " ") i--;
+  return i;
+}
 
 function locate(revealedCount) {
   let offset = 0;
@@ -82,9 +130,17 @@ export function attachAboutTyping(containerEl, pane) {
     const isEnter = e.key === "Enter";
     if (!printable && !isBackspace && !isEnter) return;
     e.preventDefault();
-    revealedCount = isBackspace
-      ? Math.max(0, revealedCount - 1)
-      : Math.min(TOTAL_LENGTH, revealedCount + 1);
+    if (isBackspace) {
+      revealedCount =
+        revealedCount > WORD_MODE_THRESHOLD
+          ? prevWordBoundary(revealedCount)
+          : Math.max(0, revealedCount - 1);
+    } else {
+      revealedCount =
+        revealedCount >= WORD_MODE_THRESHOLD
+          ? Math.min(TOTAL_LENGTH, nextWordBoundary(revealedCount))
+          : Math.min(TOTAL_LENGTH, revealedCount + 1);
+    }
     paint();
   };
   window.addEventListener("keydown", onKey, true);

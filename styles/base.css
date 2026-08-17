@@ -58,6 +58,23 @@ button {
   background: repeating-linear-gradient(180deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 3px);
 }
 
+/* Fades the flickering background video to black while reel.html (the
+   Vimeo embed) is open, and back once it's closed. Sits above the video and
+   scanlines but below the window stack so it never dims the window itself. */
+#video-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: #000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 500ms ease;
+}
+
+#video-dim[data-active="1"] {
+  opacity: 1;
+}
+
 /* #window-stack itself is deliberately not given position/size in CSS:
    each .window-frame child is independently position:absolute against
    #desktop (the nearest positioned ancestor). An empty full-bleed box here

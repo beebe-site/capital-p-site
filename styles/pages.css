@@ -3,7 +3,11 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* "safe" falls back to start-alignment instead of centering when content
+     overflows — plain `center` clips symmetrically off both ends on short
+     viewports (landscape phones especially), with the top portion left
+     permanently unreachable since scroll position can't go negative. */
+  justify-content: safe center;
   align-items: center;
   gap: clamp(10px, 1.6vw, 16px);
 }
@@ -119,7 +123,8 @@
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* see .home-pane's note on justify-content: safe center */
+  justify-content: safe center;
   gap: 14px;
 }
 

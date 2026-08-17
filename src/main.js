@@ -8,6 +8,7 @@ const store = createStore();
 
 const videoEl = document.getElementById("bg-video");
 const scanlinesEl = document.getElementById("scanlines");
+const videoDimEl = document.getElementById("video-dim");
 const windowStackEl = document.getElementById("window-stack");
 const desktopIconEl = document.getElementById("desktop-icon-layer");
 const loaderEl = document.getElementById("loader-layer");
@@ -52,6 +53,10 @@ function rebuild() {
   cleanups.forEach((fn) => fn());
   const s = store.get();
   cleanups = rebuildWindowStack(windowStackEl, { stack: s.stack, phone: s.phone }, buildCtx());
+  // reel.html has no further navigation, so it's always the topmost entry
+  // whenever it's present — being "in" the stack means being "open".
+  const reelOpen = s.stack[s.stack.length - 1] === "reel";
+  videoDimEl.dataset.active = reelOpen ? "1" : "0";
 }
 
 function boot() {
