@@ -20,6 +20,25 @@ Mapping the runtime to normal React, for reading purposes:
 
 ---
 
+## ⚠️ Post-handoff changes
+
+The rest of this document is the **original** design handoff and is left intact as a historical record — but the shipped site has since diverged from it in the ways below, at the client's request, during implementation. Where the two disagree, **this section wins**, not the sections further down.
+
+- **about.txt easter egg — mechanic changed.** The "typing easter egg" described later in this doc (§ about.html, the `contentEditable` free-typing behavior) was replaced with a different one: the panel opens holding only the seed text **"Capital P is a"**, and every keystroke anywhere in the window — regardless of which key — reveals the next real character of the copy instead of inserting what was actually typed, like the passage is typing itself through you. Backspace rewinds the reveal by one character; reaching the end just stops (no wraparound, no fallback to literal typing). Still gated the same way structurally, but the disabled range is now **phone and tablet** (≤1024px), not just phone (≤640px) — the original 640px breakpoint still governs window cascade sizing only.
+- **about.txt copy — rewritten.** The verbatim paragraphs quoted later in this doc are the *original* copy. The current text is:
+
+  > "Capital P is a company offering full-service production of music videos, commercials, brand campaigns, social media rollouts, sound design, and audio mastering.
+  >
+  > Our team, based in LA, NY, and beyond, bring expertise in visuals and audio that ensures trends are not followed, but broken. **We challenge norms, break boundaries, and always bring a capital-p Punch.**"
+
+  Only that closing sentence is bold — not the whole paragraph, unlike the original's standalone bold closer.
+- **contact.html — LinkedIn card removed.** The page now has two cards (EMAIL, INSTAGRAM), not three. The LINKEDIN row described later in this doc no longer exists.
+- **team.html — Burns' thumbnail re-cropped.** The original `tm-burns.jpg` cropped out his face. It's been replaced with a proper headshot crop from a higher-resolution source photo the client supplied; no special-case CSS needed for it anymore.
+- **The `↗` "leaves the site" indicator is drawn as inline SVG, not the Unicode character.** In every font tried (Silkscreen, Courier New), the ↗ glyph fell back to a symbol font with different vertical metrics than the surrounding text and never centered correctly against it, in every context it appears (work list titles, the WATCH ON VIMEO button, bio contact links, the contact page). It's now a small hand-built SVG arrow (shaft + arrowhead as one continuous path, so the join is exact by construction) sized in `em` off `.arrow-external` in `styles/pages.css`. Behaves identically, looks correct.
+- **External links also fire `window.open()` explicitly**, not just `target="_blank"`, since some hosting/embedding contexts silently ignore the anchor's native new-tab behavior.
+
+---
+
 ## Design Tokens
 
 ### Colors
