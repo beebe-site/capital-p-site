@@ -1,0 +1,6 @@
+# Design handoff material — prototype + proprietary runtime, not part of the shipped site
+reference/
+
+# OS/editor cruft
+.DS_Store
+*.swp

@@ -1,0 +1,22 @@
+:root {
+  /* Colors */
+  --ink: #1A1870;
+  --bevel-blue-light: #4A46B8;
+  --bevel-blue-dark: #0D0B45;
+  --cream: #EFEFB9;
+  --chrome-face: #D6D6D2;
+  --chrome-highlight: #FFFFFF;
+  --chrome-light: #E9E9E5;
+  --chrome-hover: #E4E4E0;
+  --chrome-shadow: #9A9A96;
+  --chrome-shadow-dark: #4A4A55;
+  --pane-bg: #EBEBEB;
+  --body-dark: #3A3A46;
+  --muted: #5C5C68;
+  --desktop-void: #0B0B14;
+
+  /* Fonts */
+  --font-silkscreen: "Silkscreen", monospace;
+  --font-verdana: Verdana, Tahoma, Geneva, sans-serif;
+  --font-courier: "Courier New", Courier, monospace;
+}

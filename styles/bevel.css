@@ -1,0 +1,76 @@
+/* The four-shadow bevel system — the signature of this design.
+   Every raised/pressed/inset surface reuses these exact shadow stacks.
+   No border properties anywhere in this codebase. */
+
+:root {
+  --shadow-raised:
+    inset  1px  1px 0 var(--chrome-highlight),
+    inset -1px -1px 0 var(--chrome-shadow-dark),
+    inset  2px  2px 0 var(--chrome-light),
+    inset -2px -2px 0 var(--chrome-shadow);
+
+  /* PRESSED (:active) and INSET (static content wells) share this exact stack */
+  --shadow-pressed:
+    inset  1px  1px 0 var(--chrome-shadow),
+    inset -1px -1px 0 var(--chrome-highlight),
+    inset  2px  2px 0 var(--chrome-shadow-dark),
+    inset -2px -2px 0 var(--chrome-light);
+
+  --shadow-titlebar:
+    inset 1px 1px 0 var(--bevel-blue-light),
+    inset -1px -1px 0 var(--bevel-blue-dark);
+
+  --shadow-status-cell:
+    inset 1px 1px 0 var(--chrome-shadow),
+    inset -1px -1px 0 var(--chrome-highlight);
+
+  --drop-shadow-window: 6px 6px 0 rgba(0, 0, 0, 0.45);
+  --drop-shadow-icon: 4px 4px 0 rgba(0, 0, 0, 0.42);
+}
+
+.bevel-raised {
+  box-shadow: var(--shadow-raised);
+}
+
+.bevel-inset {
+  box-shadow: var(--shadow-pressed);
+}
+
+.bevel-titlebar {
+  box-shadow: var(--shadow-titlebar);
+}
+
+.bevel-status-cell {
+  box-shadow: var(--shadow-status-cell);
+}
+
+.bevel-window-frame {
+  box-shadow: var(--shadow-raised), var(--drop-shadow-window);
+}
+
+/* Interactive raised surface: buttons, cards, link-cards.
+   Hover/active snap instantly — no transitions, period-correct UI. */
+.raised-btn {
+  border: 0;
+  background: var(--chrome-face);
+  cursor: pointer;
+  box-shadow: var(--shadow-raised);
+}
+
+.raised-btn:hover {
+  background: var(--chrome-hover);
+}
+
+.raised-btn:active {
+  box-shadow: var(--shadow-pressed);
+}
+
+.dashed-on-blue {
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--cream) 0 5px, transparent 5px 9px);
+}
+
+.dashed-on-chrome {
+  height: 3px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 5px, transparent 5px 9px);
+}

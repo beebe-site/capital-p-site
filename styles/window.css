@@ -1,0 +1,119 @@
+.window-frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
+}
+
+.window-frame[data-inactive="1"] {
+  pointer-events: none;
+}
+
+.window-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--chrome-face);
+  padding: 3px;
+  animation: cpPop 120ms ease-out both;
+}
+
+.window-titlebar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1vw, 10px);
+  background: var(--ink);
+  padding: 5px;
+}
+
+.window-title {
+  flex: 0 0 auto;
+  font-family: var(--font-silkscreen);
+  font-size: clamp(12px, 1.9vw, 16px);
+  color: var(--cream);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.titlebar-btn {
+  flex: 0 0 auto;
+  height: 32px;
+  border: 0;
+  background: var(--chrome-face);
+  color: var(--ink);
+  font-family: var(--font-silkscreen);
+  cursor: pointer;
+  box-shadow: var(--shadow-raised);
+}
+
+.titlebar-btn:hover {
+  background: var(--chrome-hover);
+}
+
+.titlebar-btn:active {
+  box-shadow: var(--shadow-pressed);
+}
+
+.titlebar-btn--home {
+  padding: 0 13px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.titlebar-btn--close {
+  width: 34px;
+  font-size: 14px;
+}
+
+.window-pane {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin: 3px 0;
+  background: var(--pane-bg);
+  padding: clamp(16px, 3vw, 30px);
+  box-shadow: var(--shadow-pressed);
+}
+
+.window-statusbar {
+  flex: 0 0 auto;
+  display: flex;
+  gap: 3px;
+  align-items: stretch;
+}
+
+.status-left {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 7px 10px;
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--body-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: var(--shadow-status-cell);
+}
+
+.status-right {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--body-dark);
+  white-space: nowrap;
+  box-shadow: var(--shadow-status-cell);
+}
+
+.window-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(11, 11, 20, 0.34);
+  pointer-events: none;
+}

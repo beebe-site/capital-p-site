@@ -1,0 +1,644 @@
+/* ---------- home ---------- */
+.home-pane {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 16px);
+}
+
+.home-logo {
+  display: block;
+  width: min(300px, 100%);
+  height: auto;
+}
+
+.home-tagline {
+  font-family: var(--font-silkscreen);
+  font-size: clamp(13px, 1.9vw, 16px);
+  line-height: 1.6;
+  color: var(--ink);
+  text-align: center;
+  text-wrap: pretty;
+  max-width: 44ch;
+}
+
+.home-rule {
+  width: 100%;
+}
+
+.home-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: clamp(12px, 2vw, 18px);
+}
+
+.icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 10px;
+}
+
+.icon-btn-label {
+  font-family: var(--font-silkscreen);
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+/* ---------- about ---------- */
+.about-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-frame {
+  background: var(--chrome-face);
+  padding: 3px;
+}
+
+.caption-bar {
+  background: var(--ink);
+  padding: 5px 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--cream);
+}
+
+.caption-bar-hint {
+  opacity: 0.75;
+}
+
+.about-body {
+  margin-top: 3px;
+  background: #FFFFFF;
+  padding: clamp(14px, 2.4vw, 22px);
+  font-family: var(--font-courier);
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.ghost-p {
+  margin: 0 0 1.4em;
+  text-wrap: pretty;
+}
+
+/* Bold comes from an explicit <b> run inside the paragraph (see
+   ABOUT_PARAGRAPHS), never from paragraph position, so a paragraph mid-reveal
+   is never mistaken for a "final" one. Only the trailing margin is safely
+   keyed off :last-child — self-corrects the moment the next paragraph
+   appears, so a brief margin change during the reveal is a non-issue. */
+.ghost-p:last-child {
+  margin: 0;
+}
+
+.ghost-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: var(--ink);
+  animation: cpBlink 1s step-end infinite;
+}
+
+/* ---------- reel ---------- */
+.reel-pane {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.reel-frame {
+  background: var(--chrome-face);
+  padding: 3px;
+}
+
+.reel-video-well {
+  margin-top: 3px;
+  background: #000000;
+  aspect-ratio: 16 / 9;
+}
+
+.reel-video-well iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------- work list / rows (shared by work.html) ---------- */
+.work-list {
+  max-width: 840px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.work-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 18px);
+  padding: 10px;
+  text-decoration: none;
+}
+
+.work-row.raised-btn {
+  width: 100%;
+  text-align: left;
+}
+
+.work-thumb {
+  flex: 0 0 auto;
+  width: clamp(104px, 34vw, 340px);
+  aspect-ratio: 16 / 9;
+  padding: 3px;
+  background: var(--pane-bg);
+}
+
+.work-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.work-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.work-title {
+  font-family: var(--font-verdana);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1.4;
+  color: var(--ink);
+  font-size: clamp(13px, 1.8vw, 16px);
+}
+
+/* "Leaves the site" indicator, drawn as inline SVG rather than set as a
+   Unicode character: ↗ reliably falls back to a symbol font with different
+   vertical metrics than the surrounding text in every face we tried
+   (Silkscreen, Courier New), so no font-based version ever centered
+   correctly. An earlier CSS-border version (hand-guessed shaft/arrowhead
+   coordinates) had the same problem one level down — the two pieces didn't
+   actually meet at a shared point. The SVG path below defines the shaft and
+   arrowhead as one continuous path, so the join is exact by construction,
+   not by eyeballing. Sized in em so one rule serves every usage site (work
+   list titles, buttons, bio links, contact cards). */
+.arrow-external {
+  width: 0.7em;
+  height: 0.7em;
+  vertical-align: -0.05em;
+  flex-shrink: 0;
+}
+
+.glyph-internal {
+  font-family: var(--font-silkscreen);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.work-description {
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  line-height: 2;
+  letter-spacing: 0.4px;
+  color: var(--body-dark);
+  text-wrap: pretty;
+}
+
+/* ---------- project detail ---------- */
+.detail-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.6vw, 22px);
+}
+
+.detail-still {
+  align-self: flex-start;
+  width: auto;
+  max-width: min(620px, 100%);
+  max-height: min(34vh, 260px);
+  aspect-ratio: 16 / 9;
+  padding: 3px;
+  background: var(--pane-bg);
+}
+
+.detail-still img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-title {
+  font-family: var(--font-verdana);
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  line-height: 1.35;
+  color: var(--ink);
+  font-size: clamp(19px, 2.6vw, 26px);
+  text-wrap: pretty;
+}
+
+.detail-description {
+  font-family: var(--font-silkscreen);
+  font-size: 14px;
+  line-height: 1.9;
+  letter-spacing: 0.4px;
+  color: var(--body-dark);
+  text-wrap: pretty;
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detail-action {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 14px 18px;
+  text-decoration: none;
+  font-family: var(--font-silkscreen);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+.detail-password-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+}
+
+.detail-password-label {
+  font-family: var(--font-silkscreen);
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+.detail-password-value {
+  font-family: var(--font-courier);
+  font-size: 17px;
+  color: var(--ink);
+}
+
+/* ---------- team ---------- */
+.team-list {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 18px);
+  padding: 12px;
+  width: 100%;
+  text-align: left;
+}
+
+.team-portrait {
+  flex: 0 0 auto;
+  width: 88px;
+  height: 88px;
+  padding: 3px;
+  background: var(--pane-bg);
+  overflow: hidden;
+}
+
+.team-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.team-name {
+  font-family: var(--font-verdana);
+  font-weight: 700;
+  font-size: clamp(15px, 2.1vw, 18px);
+  letter-spacing: -0.2px;
+  color: var(--ink);
+}
+
+.team-role {
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--chrome-shadow-dark);
+}
+
+.team-chevron {
+  flex: 0 0 auto;
+  padding-right: 8px;
+  font-family: var(--font-silkscreen);
+  font-size: 15px;
+  color: var(--ink);
+}
+
+/* ---------- bio ---------- */
+.bio-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: clamp(18px, 3vw, 28px);
+}
+
+.bio-portrait {
+  flex: 0 0 auto;
+  width: clamp(170px, 30vw, 250px);
+  aspect-ratio: 1 / 1;
+  padding: 3px;
+  background: var(--pane-bg);
+}
+
+.bio-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bio-text-col {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.bio-name-block {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.bio-name {
+  font-family: var(--font-silkscreen);
+  font-size: clamp(17px, 2.6vw, 23px);
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.bio-role {
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--chrome-shadow-dark);
+}
+
+.bio-prose {
+  background: #FFFFFF;
+  padding: clamp(14px, 2.2vw, 20px);
+  font-family: var(--font-courier);
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--ink);
+}
+
+.bio-prose p {
+  margin: 0 0 1.2em;
+  text-wrap: pretty;
+}
+
+.bio-prose p:last-child {
+  margin: 0;
+}
+
+.bio-contact-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bio-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px 14px;
+}
+
+.bio-contact-label {
+  flex: 0 0 110px;
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+.bio-contact-value {
+  flex: 1 1 180px;
+  font-family: var(--font-courier);
+  font-size: 15px;
+}
+
+/* ---------- contact ---------- */
+.contact-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-heading {
+  font-family: var(--font-silkscreen);
+  font-size: clamp(18px, 3vw, 26px);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.contact-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: clamp(12px, 2vw, 18px);
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 22px 12px;
+  text-decoration: none;
+}
+
+.contact-card-label {
+  font-family: var(--font-silkscreen);
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.contact-card-value {
+  font-family: var(--font-courier);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- loader ---------- */
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  background: var(--chrome-face);
+  padding: 3px;
+}
+
+.loader-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  padding: 5px;
+}
+
+.loader-title {
+  flex: 0 0 auto;
+  font-family: var(--font-silkscreen);
+  font-size: clamp(12px, 1.9vw, 15px);
+  color: var(--cream);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.loader-body {
+  margin: 3px 0;
+  background: var(--pane-bg);
+  padding: clamp(18px, 3vw, 26px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.loader-heading {
+  font-family: var(--font-silkscreen);
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+
+.loader-trough {
+  height: 26px;
+  background: #FFFFFF;
+  padding: 3px;
+}
+
+.loader-fill {
+  height: 100%;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 14px, var(--pane-bg) 14px 17px);
+  transition: width 120ms linear;
+}
+
+.loader-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 14px;
+  font-family: var(--font-courier);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.loader-filename {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.loader-pct {
+  font-family: var(--font-silkscreen);
+  font-size: 12px;
+  color: var(--ink);
+}
+
+/* ---------- boot icon ---------- */
+.boot-icon-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.boot-icon-tile {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  box-shadow: inset 2px 2px 0 var(--bevel-blue-light), inset -2px -2px 0 var(--bevel-blue-dark), var(--drop-shadow-icon);
+}
+
+.boot-icon-glyph {
+  font-family: var(--font-silkscreen);
+  font-size: 38px;
+  line-height: 1;
+  color: var(--cream);
+  padding-bottom: 4px;
+}
+
+.boot-icon-label {
+  font-family: var(--font-silkscreen);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cream);
+  background: var(--ink);
+  padding: 5px 9px;
+}
