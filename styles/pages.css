@@ -647,3 +647,16 @@
   background: var(--ink);
   padding: 5px 9px;
 }
+
+.boot-icon-hint {
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--cream);
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.boot-icon-hint[data-visible="1"] {
+  opacity: 0.85;
+}

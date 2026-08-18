@@ -2,6 +2,12 @@ import { renderWindowFrame } from "./windowShell.js";
 import { getPageModule } from "./pages/index.js";
 import { ASSETS } from "../preload.js";
 
+// If the boot icon sits unclicked for 5s, a hint fades in nudging the user
+// toward it — wording keyed off input type (touch vs mouse), not viewport
+// width, since a tablet can be wider than the phone breakpoint yet still
+// touch-primary.
+const BOOT_HINT_DELAY = 5000;
+
 export function renderBootIcon(container, onOpen) {
   container.innerHTML = `
     <button type="button" class="boot-icon-btn">
@@ -9,9 +15,26 @@ export function renderBootIcon(container, onOpen) {
         <span class="boot-icon-glyph">P</span>
       </span>
       <span class="boot-icon-label">CAPITAL_P.EXE</span>
+      <span class="boot-icon-hint" data-boot-hint></span>
     </button>
   `;
-  container.querySelector("button").addEventListener("click", onOpen, { once: true });
+  const btn = container.querySelector("button");
+  const hint = container.querySelector("[data-boot-hint]");
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+  hint.textContent = isTouch ? "(tap it)" : "(you're supposed to click it)";
+
+  const hintTimer = setTimeout(() => {
+    hint.dataset.visible = "1";
+  }, BOOT_HINT_DELAY);
+
+  btn.addEventListener(
+    "click",
+    () => {
+      clearTimeout(hintTimer);
+      onOpen();
+    },
+    { once: true }
+  );
 }
 
 export function mountLoader(container) {
