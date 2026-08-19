@@ -64,6 +64,15 @@ export function envelopeGlyph() {
   ${TILE_CLOSE}`;
 }
 
+// Client-supplied image, not CSS boxes like the rest of this file — it
+// already bakes in its own #1A1870-ish background (sampled corner-to-corner
+// against --ink, near enough not to seam against the CSS-drawn tiles beside
+// it), so it's dropped in as a complete 64x64 tile rather than composited
+// inside TILE_OPEN/TILE_CLOSE like the others.
+export function aiPolicyGlyph() {
+  return `<img class="home-icon-img" src="assets/ai-policy-icon-512.png" alt="">`;
+}
+
 export function instagramRingGlyph() {
   return `${TILE_OPEN}
     <span style="width:38px;height:38px;display:grid;place-items:center;box-shadow:inset 0 0 0 4px var(--cream)">

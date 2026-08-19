@@ -1,4 +1,11 @@
-import { aboutGlyph, reelGlyph, workGlyph, teamGlyph, envelopeGlyph } from "../../glyphs.js";
+import {
+  aboutGlyph,
+  reelGlyph,
+  workGlyph,
+  teamGlyph,
+  envelopeGlyph,
+  aiPolicyGlyph,
+} from "../../glyphs.js";
 
 export const home = {
   html() {
@@ -8,6 +15,7 @@ export const home = {
       { nav: "work", glyph: workGlyph(), label: "WORK" },
       { nav: "team", glyph: teamGlyph(), label: "TEAM" },
       { nav: "contact", glyph: envelopeGlyph(), label: "CONTACT" },
+      { nav: "ai-policy", glyph: aiPolicyGlyph(), label: "AI POLICY" },
     ];
 
     const buttonsHTML = buttons

@@ -35,7 +35,12 @@
 .home-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  /* Fixed 3 columns (was auto-fit) now that there are 6 icons — deliberately
+     not shrunk to fit one screen: .home-pane's `justify-content: safe
+     center` already lets the pane scroll instead of clipping when content
+     runs taller than the window, so a 3x2 grid is free to take the vertical
+     space it naturally wants. */
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(12px, 2vw, 18px);
 }
 
@@ -52,6 +57,13 @@
   font-size: 15px;
   letter-spacing: 0.5px;
   color: var(--ink);
+}
+
+.home-icon-img {
+  display: block;
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
 }
 
 /* ---------- about ---------- */
@@ -106,6 +118,10 @@
    appears, so a brief margin change during the reveal is a non-issue. */
 .ghost-p:last-child {
   margin: 0;
+}
+
+.ai-policy-signature {
+  text-align: right;
 }
 
 .ghost-caret {
@@ -385,6 +401,47 @@
   font-family: var(--font-silkscreen);
   font-size: 15px;
   color: var(--ink);
+}
+
+/* ---------- ai policy index ---------- */
+.policy-list {
+  max-width: 700px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.policy-row {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 18px);
+  padding: 16px;
+  width: 100%;
+  text-align: left;
+}
+
+.policy-row-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.policy-date {
+  font-family: var(--font-verdana);
+  font-weight: 700;
+  font-size: clamp(15px, 2.1vw, 18px);
+  letter-spacing: -0.2px;
+  color: var(--ink);
+}
+
+.policy-tag {
+  font-family: var(--font-silkscreen);
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--chrome-shadow-dark);
 }
 
 /* ---------- bio ---------- */

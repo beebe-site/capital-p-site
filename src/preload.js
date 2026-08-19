@@ -3,6 +3,7 @@ export const ASSETS = [
   "assets/tm-beebe.jpg", "assets/tm-burns.jpg", "assets/tm-jake.jpg", "assets/tm-kali.jpg", "assets/tm-luke.jpg",
   "assets/bio-beebe.jpg", "assets/bio-burns.jpg", "assets/bio-jake.jpg", "assets/bio-kali.jpg", "assets/bio-luke.jpg",
   "assets/wk-tracy-16x9.jpg", "assets/wk-makesense.jpg", "assets/wk-dummy.jpg", "assets/wk-marriage.jpg",
+  "assets/ai-policy-icon-512.png",
 ];
 
 // Everything is fetched up front so work/team never buffer mid-browse.
