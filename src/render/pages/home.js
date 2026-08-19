@@ -6,6 +6,7 @@ import {
   envelopeGlyph,
   aiPolicyGlyph,
 } from "../../glyphs.js";
+import { CONFIG } from "../../config.js";
 
 export const home = {
   html() {
@@ -15,8 +16,10 @@ export const home = {
       { nav: "work", glyph: workGlyph(), label: "WORK" },
       { nav: "team", glyph: teamGlyph(), label: "TEAM" },
       { nav: "contact", glyph: envelopeGlyph(), label: "CONTACT" },
-      { nav: "ai-policy", glyph: aiPolicyGlyph(), label: "AI POLICY" },
     ];
+    if (CONFIG.showAiPolicy) {
+      buttons.push({ nav: "ai-policy", glyph: aiPolicyGlyph(), label: "AI POLICY" });
+    }
 
     const buttonsHTML = buttons
       .map(

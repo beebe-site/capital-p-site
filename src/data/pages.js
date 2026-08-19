@@ -1,8 +1,13 @@
 import { AI_POLICY_VERSIONS } from "./content.js";
+import { CONFIG } from "../config.js";
 
 // Page registry — title bar + status bar text, verbatim.
 export const PAGES = {
-  "home": { title: "index.html", path: "C:\\CAPITAL_P\\INDEX.HTML", status: "6 item(s)" },
+  "home": {
+    title: "index.html",
+    path: "C:\\CAPITAL_P\\INDEX.HTML",
+    status: CONFIG.showAiPolicy ? "6 item(s)" : "5 item(s)",
+  },
   "about": { title: "about.html", path: "C:\\CAPITAL_P\\ABOUT.HTML", status: "read/write" },
   "ai-policy": {
     title: "ai-policy.html",

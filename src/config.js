@@ -16,4 +16,12 @@ export const CONFIG = {
   // only. 1024px is the conventional tablet-landscape ceiling; adjust here
   // if you want a different cutoff.
   aboutRestrictedMaxWidth: 1024,
+
+  // Temporary kill switch: the AI POLICY icon/pages are fully built (home
+  // button, index-of-versions list, detail page, data) but hidden from the
+  // live site while the client finalizes the policy wording with their
+  // team. Flip to true to bring it back — nothing else needs to change.
+  // There's no URL routing in this app (see README), so hiding the home
+  // button makes the pages fully unreachable, not just unlinked.
+  showAiPolicy: false,
 };
