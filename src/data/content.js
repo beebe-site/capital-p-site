@@ -171,6 +171,20 @@ const EXT = (href, label) => `<a href="${href}" target="_blank" rel="noopener no
 
 export const AI_POLICY_VERSIONS = [
   {
+    key: "ai-policy-2026-08-24",
+    date: "August 24, 2026",
+    paragraphs: [
+      `We believe the cheery “${EXT("https://en.wikipedia.org/wiki/Artificial_intelligence", "AI")} is just a tool!” argument is a slippery slope to the complete automation of humanity, because a tool used without care quickly becomes a weapon.`,
+      `Capital P will <b>not</b> use generative ${EXT("https://en.wikipedia.org/wiki/Text-to-video_model", "video")}, ${EXT("https://en.wikipedia.org/wiki/Generative_audio", "audio")}, or ${EXT("https://en.wikipedia.org/wiki/Text-to-image_model", "photo")} in any stage of any of our projects, whether that be development, pre-production, production, post-production, or promotion. This includes visual modifications (i.e. ${EXT("https://en.wikipedia.org/wiki/Adobe_Firefly", "Adobe Firefly")} used in ${EXT("https://en.wikipedia.org/wiki/Adobe_Photoshop", "Photoshop")}). Tools that ${EXT("https://en.wikipedia.org/wiki/PatchMatch", "manipulate pixels algorithmically within the existing artboard")} and not from sampling visuals from generative AI models are permitted (i.e. content aware fill and spot healing in Photoshop). All ${EXT("https://en.wikipedia.org/wiki/PDF", "PDFs")} will be manually created by our in-house graphics team.`,
+      `Capital P permits the use of ${EXT("https://en.wikipedia.org/wiki/Large_language_model", "LLMs")} for research; as a search engine alternative wherein all results are compiled and thoroughly vetted for accuracy. LLMs may also be used to help code (i.e. websites/spreadsheets).`,
+      `AI-generated text will <b>not</b> be copied into any projects or emailed/texted to clients on behalf of Capital P.`,
+      `Capital P is of the opinion that confidential information, or even basic client information, <b>cannot</b> be considered protected if it is uploaded to an ${EXT("https://en.wikipedia.org/wiki/Large_language_model", "LLM")}. Therefore, in the rare cases human/manual resources have been exhausted/are not applicable, Capital P will only upload information to LLMs (i.e. extracting large information in threads/meetings, clarification on legalese) which has been scrubbed/anonymized of all sensitive information by hand. The use of local LLMs (including local ${EXT("https://en.wikipedia.org/wiki/Natural_language_generation", "NLG")} tools) are permitted, because the information fed to them cannot reach a third party connected to the internet.`,
+      `This policy will be available to view as long as this website is public, allowing us to be held accountable for previous commitments if a new draft of the policy takes effect.`,
+      `It is a company’s responsibility to provide transparency for use of dangerous technologies, so if there are any areas you feel are omitted from this draft of the policy, please reach out.`,
+    ],
+    signature: "-The team at Capital P Productions",
+  },
+  {
     key: "ai-policy-2026-08-18",
     date: "August 18, 2026",
     paragraphs: [
